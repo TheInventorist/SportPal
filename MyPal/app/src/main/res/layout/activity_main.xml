@@ -21,95 +21,96 @@
         app:srcCompat="@drawable/logom" />
 
     <!-- ingresar correo-->
+
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
+        android:id="@+id/emailLogin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="Correo electrónico"
         android:inputType="textPersonName"
         android:textColor="#000000"
-        android:textColorHint="#6A575252"
+        android:textColorHint="#C1474444"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <!-- ingresar contraseña-->
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
+        android:id="@+id/claveLogin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
         android:ems="10"
+        android:hint="Constraseña"
         android:inputType="textPassword"
+        android:maxLength="10"
+        android:textColor="#000000"
+        android:textColorHint="#C1474444"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.449" />
+
+
+    <!-- boton entrar -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="189dp"
+        android:layout_height="34dp"
+        android:background="@drawable/boton_redondo"
+        android:text="Entrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnCrearcuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        android:hint="Constraseña"
-        android:textColor="#000000"
-        android:textColorHint="#6A575252"
-        android:maxLength="10"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/claveLogin"
+        app:layout_constraintVertical_bias="0.279"
+        />
     <!-- boton registrarse-->
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnCrearcuenta"
         android:layout_width="191dp"
         android:layout_height="34dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/boton_crearcuenta"
         android:text="Crear cuenta"
-        android:textColor="#FF0000"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/claveLogin"
         app:layout_constraintVertical_bias="0.417" />
 
-    <!-- boton entrar -->
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="189dp"
-        android:layout_height="34dp"
-        android:background="@drawable/boton_redondo"
-        android:text="Entrar"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.279"
-        />
 
     <!-- boton google -->
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/imgbtnGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/btnCrearcuenta"
         app:srcCompat="@drawable/logogoogle32"
         android:background="@drawable/boton_rs" />
 
     <!-- boton facebook -->
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/imgbtnFb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.614"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/btnCrearcuenta"
         app:srcCompat="@drawable/logofb32"
         android:background="@drawable/boton_rs"/>
 
@@ -120,10 +121,11 @@
         android:layout_height="wrap_content"
         android:text="Si no está registrado cree su cuenta"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCrearcuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintVertical_bias="0.587" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
