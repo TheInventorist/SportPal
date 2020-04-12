@@ -78,6 +78,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/boton_crearcuenta"
+        android:onClick="onButtonClick"
         android:text="Crear cuenta"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
