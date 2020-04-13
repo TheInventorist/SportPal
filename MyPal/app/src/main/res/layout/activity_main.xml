@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logom" />
+        app:srcCompat="@drawable/mypal" />
 
     <!-- ingresar correo-->
 
@@ -39,6 +39,9 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <!-- ingresar contraseña-->
+
+
+    <!-- boton entrar -->
     <EditText
         android:id="@+id/claveLogin"
         android:layout_width="wrap_content"
@@ -49,15 +52,13 @@
         android:maxLength="10"
         android:textColor="#000000"
         android:textColorHint="#C1474444"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
+        app:layout_constraintTop_toBottomOf="@+id/emailLogin"
+        app:layout_constraintVertical_bias="0.0" />
 
-
-    <!-- boton entrar -->
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="189dp"
