@@ -1,9 +1,11 @@
-package com.example.mypal;
+package com.example.mypal.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.mypal.R;
 
 public class registro extends AppCompatActivity {
 
