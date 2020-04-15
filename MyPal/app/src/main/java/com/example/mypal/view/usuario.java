@@ -1,8 +1,10 @@
-package com.example.mypal;
+package com.example.mypal.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.mypal.R;
 
 public class usuario extends AppCompatActivity {
 
