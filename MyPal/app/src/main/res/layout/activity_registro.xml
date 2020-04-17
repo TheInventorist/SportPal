@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
+<<<<<<< HEAD
     tools:context=".view.registro">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,6 +22,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054">
     </androidx.appcompat.widget.Toolbar>
+=======
+    tools:context=".viewmodel.registro">
+
+>>>>>>> desarrollo_UI
 
     <TextView
         android:id="@+id/textView12"

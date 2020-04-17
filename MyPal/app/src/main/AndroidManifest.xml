@@ -10,17 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
+<<<<<<< HEAD
         <activity android:name=".view.verificador"
+=======
+        <activity android:name=".viewmodel.verificador"
+>>>>>>> desarrollo_UI
             android:theme="@style/Theme.AppCompat.Dialog.MinWidth">
             <intent-filter>
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
 
+<<<<<<< HEAD
         <activity android:name=".view.MainActivity">
+=======
+        <activity android:name=".viewmodel.MainActivity">
+>>>>>>> desarrollo_UI
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,16 +35,25 @@
 
         <activity
 <<<<<<< HEAD
+<<<<<<< HEAD
             android:name=".registro"
             android:exported="true">
 =======
             android:name=".view.registro"
+=======
+            android:name=".viewmodel.registro"
+>>>>>>> desarrollo_UI
             android:exported="true"
             android:theme="@style/AppTheme" >
 >>>>>>> 6b26fea26846307c71e9ec44504270c43577f7c7
         </activity>
 
+<<<<<<< HEAD
         <activity android:name=".view.usuario">
+=======
+        <activity android:name=".viewmodel.usuario"
+            android:theme="@style/AppTheme1">
+>>>>>>> desarrollo_UI
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
