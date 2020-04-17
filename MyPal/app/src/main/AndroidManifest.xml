@@ -10,29 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <activity android:name=".verificador"
+        <activity android:name=".viewmodel.verificador"
             android:theme="@style/Theme.AppCompat.Dialog.MinWidth">
             <intent-filter>
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".viewmodel.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
 
         <activity
-            android:name=".registro"
+            android:name=".viewmodel.registro"
             android:exported="true"
             android:theme="@style/AppTheme" >
         </activity>
 
-        <activity android:name=".usuario">
+        <activity android:name=".viewmodel.usuario"
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

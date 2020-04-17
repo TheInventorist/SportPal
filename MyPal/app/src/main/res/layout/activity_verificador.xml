@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".verificador"
+    tools:context=".viewmodel.verificador"
     android:background="#E2EAED">
 
 
@@ -55,8 +55,13 @@
         android:layout_height="35dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/boton_verificador"
+        android:gravity="center"
+        android:onClick="onButtonUsuario"
         android:text="verificar"
-        android:textColorHint="#FFFFFF"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/colorPrimary"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

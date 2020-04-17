@@ -5,6 +5,14 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#EE0000</item>
         <item name="colorPrimaryDark">#000000</item>
+        <item name="title">Registro</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#9C27B0</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="title">Perfil</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
