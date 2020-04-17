@@ -4,12 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".view.verificador"
-=======
-    tools:context=".viewmodel.verificador"
->>>>>>> desarrollo_UI
-    android:background="#E2EAED">
+    tools:context=".viewmodel.verificador">
 
 
     <ImageView

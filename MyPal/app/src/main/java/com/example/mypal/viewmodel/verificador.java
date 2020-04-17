@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.mypal.R;
-import com.example.mypal.viewmodel.usuario;
 
 
 public class verificador extends AppCompatActivity {

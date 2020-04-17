@@ -1,8 +1,6 @@
-<<<<<<< HEAD:MyPal/app/src/main/java/com/example/mypal/view/MainActivity.java
-package com.example.mypal.view;
-=======
+
 package com.example.mypal.viewmodel;
->>>>>>> desarrollo_UI:MyPal/app/src/main/java/com/example/mypal/viewmodel/MainActivity.java
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
@@ -11,11 +9,7 @@ import android.content.Intent;
 import android.widget.EditText;
 
 import com.example.mypal.R;
-<<<<<<< HEAD:MyPal/app/src/main/java/com/example/mypal/view/MainActivity.java
 
-public class MainActivity extends AppCompatActivity {
-=======
->>>>>>> desarrollo_UI:MyPal/app/src/main/java/com/example/mypal/viewmodel/MainActivity.java
 
 public class MainActivity extends AppCompatActivity {
  public EditText emailLogin;

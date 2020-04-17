@@ -1,8 +1,5 @@
-<<<<<<< HEAD:MyPal/app/src/main/java/com/example/mypal/view/usuario.java
-package com.example.mypal.view;
-=======
 package com.example.mypal.viewmodel;
->>>>>>> desarrollo_UI:MyPal/app/src/main/java/com/example/mypal/viewmodel/usuario.java
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
