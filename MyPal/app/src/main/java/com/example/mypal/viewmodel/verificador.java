@@ -33,7 +33,7 @@ public class verificador extends AppCompatActivity {
     }
     public void onButtonUsuario(View v){
         Log.d("asd","enviar codigo");
-        enviarEmail();
+        //enviarEmail();
         Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
         startActivity(myIntent3);
     }
