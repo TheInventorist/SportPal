@@ -52,8 +52,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser(); //obtiene el usuario actual
     }
 
     public void crearUsuario(String email, String password){
@@ -62,24 +61,18 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("registro", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            sendVerificationEmail();
-                            Log.d("registro", "se debio haber enviado el email");
-                            //updateUI(user);
+
+                            enviarEmailVerificacion();
+
                             Toast.makeText(registro.this, "Usuario Creado", Toast.LENGTH_LONG).show();
+
                             Intent myIntent2 = new Intent(getBaseContext(), verificador.class);
                             startActivity(myIntent2);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("registro", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(registro.this, "Authentication failed.",
+                            Toast.makeText(registro.this, "error de autenticacion",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
@@ -87,7 +80,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
 
 
 
-    private void sendVerificationEmail()
+    private void enviarEmailVerificacion()
     {
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -96,19 +89,15 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            // email sent
-
-
-                            // after email is sent just logout the user and finish this activity
                             FirebaseAuth.getInstance().signOut();
                             startActivity(new Intent(registro.this, MainActivity.class));
                             finish();
                         }
                         else
                         {
-                            // email not sent, so display message and restart the activity or do whatever you wish to do
+                            // no se envio el email, mostrar mensaje de reinicio de actividad or lo que sea
+                            // reinicio de la actividad
 
-                            //restart this activity
                             overridePendingTransition(0, 0);
                             finish();
                             overridePendingTransition(0, 0);
@@ -121,7 +110,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
 
 
 
-
+    // no borrar nada de aqui, servira para crear el usuario mas adelante
 
     //private void inicializarFireBase() {
     //    FirebaseApp.initializeApp(this);

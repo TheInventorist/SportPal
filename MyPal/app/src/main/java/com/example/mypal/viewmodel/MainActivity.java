@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        if (mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null) { //verifica si el usuario esta logeado
             finish();
             startActivity(new Intent(this, MainActivity.class));
         }
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String email = emailLogin.getText().toString();
                 String pass = claveLogin.getText().toString();
 
-                logearse(email, pass);
+                login(email, pass);
                 break;
 
 
@@ -78,52 +77,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public void logearse(String email, String password){
+
+
+
+    public void login(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("asd", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            checkIfEmailVerified();
+
+                            chekearVerificacionEmail();
+
                             Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
                             startActivity(myIntent3);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("asd", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            Toast.makeText(MainActivity.this, "fallo de autenticacion", Toast.LENGTH_SHORT).show();
                         }
-
-                        // ...
                     }
                 });
     }
 
 
 
-    private void checkIfEmailVerified()
+    private void chekearVerificacionEmail()
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user.isEmailVerified())
         {
-            // user is verified, so you can finish this activity or send user to activity which you want.
             finish();
             Toast.makeText(MainActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            // email is not verified, so just prompt the message to the user and restart this activity.
-            // NOTE: don't forget to log out the user.
             FirebaseAuth.getInstance().signOut();
-
-            //restart this activity
-
         }
     }
 
