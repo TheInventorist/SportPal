@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnLogin:
 
-                String email = emailLogin.getText().toString();
-                String pass = claveLogin.getText().toString();
+                Intent myIntent1 = new Intent(getBaseContext(), usuario.class);
+                startActivity(myIntent1);
 
-                login(email, pass);
-                break;
+
+            break;
 
 
             case R.id.btnCrearcuenta:
