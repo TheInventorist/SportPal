@@ -14,4 +14,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+        <style name="SplashTheme" parent="Theme.AppCompat">
+            <item name="android:windowBackground">@drawable/mypal</item>
+        </style>
+
+    <style name="AppTheme3.NoActionBar" parent="AppTheme1">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="title">MyPal</item>
+        <item name="statusBarBackground">@android:color/transparent</item>
+    </style>
 </resources>
