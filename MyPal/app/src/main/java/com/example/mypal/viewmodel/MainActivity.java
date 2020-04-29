@@ -5,6 +5,8 @@ package com.example.mypal.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
@@ -42,6 +44,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnCrearcuenta).setOnClickListener(this);
 
         inicializarFireBase();
+
+        //Implementacion SQLite
+        /**
+        SQLiteHelper bdbh = new SQLiteHelper(this,"DBBusquedas",null,1); //Cambiar version para gatillar onUpgrade
+
+        SQLiteDatabase db = bdbh.getWritableDatabase();
+
+        if(db != null){
+            Cursor c = db.rawQuery("SELECT * FROM Busqueda",null);
+
+            if(c.moveToFirst()){
+                StringBuilder sb = new StringBuilder();
+
+                do{
+                    sb.append(c.getString(1));
+                    sb.append("\n");
+                }while(c.moveToNext());
+
+            }
+        }
+        **/
     }
 
 
