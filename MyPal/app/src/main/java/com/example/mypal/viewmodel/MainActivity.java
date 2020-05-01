@@ -87,13 +87,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
 
-                            chekearVerificacionEmail();
+                            if(chekearVerificacionEmail() ==  1){
+                                if(isNew){
+                                    Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
+                                    startActivity(myIntent3);
+                                }
+                                else{
+                                    // aqui va el menu principal
+                                }
 
-                            Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
-                            startActivity(myIntent3);
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this, "valide su cuenta antes de entrar", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(MainActivity.this, "fallo de autenticacion", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "El nombre de la cuenta y/o la contraseña que has introducido son incorrectos.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -101,18 +111,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    private void chekearVerificacionEmail()
+    private int chekearVerificacionEmail()
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user.isEmailVerified())
         {
-            finish();
+            //finish();
             Toast.makeText(MainActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+            return 1;
         }
         else
         {
             FirebaseAuth.getInstance().signOut();
+            return 0;
         }
     }
 

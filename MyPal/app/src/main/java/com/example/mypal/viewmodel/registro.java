@@ -30,6 +30,8 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     public EditText clave2Registro;
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase fireBaseDataBase;
+    private DatabaseReference dataBaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         findViewById(R.id.btnRegistro).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(this);
+        fireBaseDataBase = FirebaseDatabase.getInstance();
+        dataBaseReference = fireBaseDataBase.getReference();
 
 
 
@@ -64,6 +69,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             enviarEmailVerificacion();
+                            crearDatosDePerfil();
 
                             Toast.makeText(registro.this, "Usuario Creado", Toast.LENGTH_LONG).show();
 
@@ -77,11 +83,22 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
     }
 
+    private  void crearDatosDePerfil(){
+        String nombre = nombreRegistro.getText().toString();
+        String telefono = telefonoRegistro.getText().toString();
+        User u = new User();
+        u.setuId(mAuth.getCurrentUser().getUid().toString());
+        u.setNombre(nombre);
+        u.setTelefono(telefono);
+        dataBaseReference.child("Usuarios").child(u.getuId()).setValue(u);
+
+
+    }
 
 
 
-    private void enviarEmailVerificacion()
-    {
+
+    private void enviarEmailVerificacion(){
         FirebaseUser user = mAuth.getCurrentUser();
 
         user.sendEmailVerification()
@@ -95,9 +112,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                         }
                         else
                         {
-                            // no se envio el email, mostrar mensaje de reinicio de actividad or lo que sea
-                            // reinicio de la actividad
-
+                            Toast.makeText(registro.this, "Error al enviar mail de confirmacion, compruebe su conexion", Toast.LENGTH_SHORT).show();
                             overridePendingTransition(0, 0);
                             finish();
                             overridePendingTransition(0, 0);
@@ -108,51 +123,6 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
     }
 
-
-
-    // no borrar nada de aqui, servira para crear el usuario mas adelante
-
-    //private void inicializarFireBase() {
-    //    FirebaseApp.initializeApp(this);
-    //    fireBaseDataBase = FirebaseDatabase.getInstance();
-    //    dataBaseReference = fireBaseDataBase.getReference();
-    //}
-
-
-
-    //public void onButtonVerif(View v){
-    //
-    //    String nombre = nombreRegistro.getText().toString();
-    //    String email = emailRegistro.getText().toString();
-    //    String telefono = telefonoRegistro.getText().toString();
-    //    String clave1 = clave1Registro.getText().toString();
-    //    String clave2 = clave2Registro.getText().toString();
-    //    if(clave1.equals(clave2)){
-    //        //User u = new User();
-
-            //u.setuId(UUID.randomUUID().toString());
-            //u.setNombre(nombre);
-            //u.setCorreo(email);
-            //u.setTelefono(telefono);
-            //u.setPassword(clave1);
-            //dataBaseReference.child("Usuarios").child(u.getuId()).setValue(u);
-            //Toast.makeText(this, "Verifique su email", Toast.LENGTH_LONG).show();
-
-
-           //crearUsuario(email,clave1);
-
-            //Toast.makeText(this, "Usuario Creado", Toast.LENGTH_LONG).show();
-            //Intent myIntent2 = new Intent(getBaseContext(), verificador.class);
-            //startActivity(myIntent2);
-        //}
-        //else{
-         //   Toast.makeText(this, "Las claves no son iguales", Toast.LENGTH_LONG).show();
-        //}
-
-
-
-
-    //}
 
 
     @Override
