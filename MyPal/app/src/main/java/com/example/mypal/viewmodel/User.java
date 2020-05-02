@@ -4,6 +4,8 @@ public class User {
     public String uId;
     public String nombre;
     public String telefono;
+    public String fecha;
+    public String descripcion;
 
 
     public User(){
@@ -34,6 +36,20 @@ public class User {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
 }
 

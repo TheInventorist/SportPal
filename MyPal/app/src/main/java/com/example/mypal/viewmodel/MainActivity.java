@@ -4,7 +4,10 @@ package com.example.mypal.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnCrearcuenta).setOnClickListener(this);
 
         inicializarFireBase();
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
     }
 
 
@@ -64,7 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String email = emailLogin.getText().toString();
                 String pass = claveLogin.getText().toString();
 
-                login(email, pass);
+                if((email.isEmpty()) && (pass.isEmpty())){
+                    Toast.makeText(MainActivity.this, "debe ingresar sus datos para conectarse.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    login(email, pass);
+                }
             break;
 
 
@@ -90,12 +101,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
 
                             if(chekearVerificacionEmail() ==  1){
-                                if(isNew){
+                                if(registro.nuevo == 1){
+                                    registro.nuevo = 0;
                                     Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
                                     startActivity(myIntent3);
                                 }
                                 else{
-                                    // aqui va el menu principal
+                                    Intent myIntent4 = new Intent(getBaseContext(), PantallaCarga.class);
+                                    startActivity(myIntent4);
                                 }
 
                             }

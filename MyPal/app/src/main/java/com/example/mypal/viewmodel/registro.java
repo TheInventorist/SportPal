@@ -28,6 +28,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     public EditText telefonoRegistro;
     public EditText clave1Registro;
     public EditText clave2Registro;
+    public static int nuevo = 0;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase fireBaseDataBase;
@@ -71,9 +72,10 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                             enviarEmailVerificacion();
                             crearDatosDePerfil();
 
-                            Toast.makeText(registro.this, "Usuario Creado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(registro.this, "Usuario Creado, verifique su email", Toast.LENGTH_LONG).show();
+                            nuevo = 1;
 
-                            Intent myIntent2 = new Intent(getBaseContext(), verificador.class);
+                            Intent myIntent2 = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(myIntent2);
                         } else {
                             Toast.makeText(registro.this, "error de autenticacion",
