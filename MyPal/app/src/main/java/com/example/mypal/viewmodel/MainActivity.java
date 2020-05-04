@@ -4,9 +4,15 @@ package com.example.mypal.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
@@ -24,7 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
+import android.os.Bundle;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
  public EditText emailLogin;
  public EditText claveLogin;
@@ -45,8 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         inicializarFireBase();
 
+
         //Implementacion SQLite
-        /**
+        /*
         SQLiteHelper bdbh = new SQLiteHelper(this,"DBBusquedas",null,1); //Cambiar version para gatillar onUpgrade
 
         SQLiteDatabase db = bdbh.getWritableDatabase();
@@ -64,7 +71,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         }
-        **/
+        */
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+
     }
 
 
@@ -87,8 +98,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String email = emailLogin.getText().toString();
                 String pass = claveLogin.getText().toString();
 
-                login(email, pass);
-                break;
+                if((email == "" && pass == "")){//.isEmpty()) && (pass.isEmpty()))
+                    Toast.makeText(MainActivity.this, "debe ingresar sus datos para conectarse.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    login(email, pass);
+                }
+            break;
 
 
             case R.id.btnCrearcuenta:
@@ -110,13 +126,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
 
-                            chekearVerificacionEmail();
+                            if(chekearVerificacionEmail() ==  1){
+                                if(registro.nuevo == 1){
+                                    registro.nuevo = 0;
+                                    Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
+                                    startActivity(myIntent3);
+                                }
+                                else{
+                                    Intent myIntent4 = new Intent(getBaseContext(), PantallaCarga.class);
+                                    startActivity(myIntent4);
+                                }
 
-                            Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
-                            startActivity(myIntent3);
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this, "valide su cuenta antes de entrar", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(MainActivity.this, "fallo de autenticacion", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "El nombre de la cuenta y/o la contraseña que has introducido son incorrectos.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -124,18 +152,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    private void chekearVerificacionEmail()
+    private int chekearVerificacionEmail()
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user.isEmailVerified())
         {
-            finish();
+            //finish();
             Toast.makeText(MainActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+            return 1;
         }
         else
         {
             FirebaseAuth.getInstance().signOut();
+            return 0;
         }
     }
 
