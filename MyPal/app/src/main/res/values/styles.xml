@@ -21,7 +21,7 @@
     <style name="AppTheme3.NoActionBar" parent="AppTheme1">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="title">MyPal</item>
+        <item name="title"></item>
         <item name="statusBarBackground">@android:color/transparent</item>
     </style>
 </resources>
