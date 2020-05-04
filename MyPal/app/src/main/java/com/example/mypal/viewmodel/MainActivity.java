@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         **/
+
+        //Chequeo si la memoria externa existe
+
     }
 
 
