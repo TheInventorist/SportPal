@@ -51,28 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         inicializarFireBase();
 
-
-        //Implementacion SQLite
-        /*
-        SQLiteHelper bdbh = new SQLiteHelper(this,"DBBusquedas",null,1); //Cambiar version para gatillar onUpgrade
-
-        SQLiteDatabase db = bdbh.getWritableDatabase();
-
-        if(db != null){
-            Cursor c = db.rawQuery("SELECT * FROM Busqueda",null);
-
-            if(c.moveToFirst()){
-                StringBuilder sb = new StringBuilder();
-
-                do{
-                    sb.append(c.getString(1));
-                    sb.append("\n");
-                }while(c.moveToNext());
-
-            }
-        }
-        */
-
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 

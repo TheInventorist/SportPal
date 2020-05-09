@@ -2,7 +2,11 @@ package com.example.mypal.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,8 +55,6 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         fireBaseDataBase = FirebaseDatabase.getInstance();
         dataBaseReference = fireBaseDataBase.getReference();
 
-
-
     }
 
     @Override
@@ -69,6 +71,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
 
+                            SaveQlite();
                             enviarEmailVerificacion();
                             crearDatosDePerfil();
 
@@ -83,6 +86,25 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                         }
                     }
                 });
+    }
+
+    private void SaveQlite(){
+        SQLiteHelper userbdbh = new SQLiteHelper(this,"DBUsuarios",null,1); //Cambiar version para gatillar onUpgrade
+        SQLiteDatabase db = userbdbh.getWritableDatabase();
+
+        String nombre = nombreRegistro.getText().toString();
+        String correo = emailRegistro.getText().toString();
+        String telefono = telefonoRegistro.getText().toString();
+
+        ContentValues registro = new ContentValues();
+        registro.put("nombreUsuario",nombre);
+        registro.put("correoUsuario",correo);
+        registro.put("telUsuario",telefono);
+
+        db.insert("datosUsuario", null, registro);
+
+        db.close();
+        Log.d("tag","Listo");
     }
 
     private  void crearDatosDePerfil(){
