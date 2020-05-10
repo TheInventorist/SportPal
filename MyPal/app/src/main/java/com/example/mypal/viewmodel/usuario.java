@@ -24,7 +24,7 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
 
         switch(v.getId()){
             case R.id.btnPerfil:
-                Intent myIntent1 = new Intent(getBaseContext(), submenu.class);
+                Intent myIntent1 = new Intent(getBaseContext(), MapActivity.class);
                 startActivity(myIntent1);
         }
     }
