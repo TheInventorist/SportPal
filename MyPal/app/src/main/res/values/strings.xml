@@ -12,5 +12,7 @@
     <string name="ajustes">Ajustes</string>
     <string name="perfil">Perfil</string>
     <string name="title_activity_maps">Mapa</string>
+    <string name="facebook_app_id">559725731403647</string> <string name="fb_login_protocol_scheme">fb559725731403647</string>
+
 </resources>
 

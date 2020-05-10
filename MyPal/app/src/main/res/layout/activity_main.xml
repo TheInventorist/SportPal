@@ -110,17 +110,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCrearcuenta"
         app:srcCompat="@drawable/logogoogle32" />
 
-    <ImageButton
-        android:id="@+id/imgbtnFb"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button_fb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/boton_rs"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.614"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCrearcuenta"
-        app:srcCompat="@drawable/logofb32" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCrearcuenta" />
 
     <TextView
         android:id="@+id/textView2"
