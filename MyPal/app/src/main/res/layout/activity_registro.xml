@@ -180,7 +180,6 @@
         android:layout_height="41dp"
         android:layout_gravity="center"
         android:background="@drawable/boton_registrarse"
-        android:onClick="onButtonVerif"
         android:text="Registrarse"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

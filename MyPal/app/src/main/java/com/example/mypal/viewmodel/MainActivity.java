@@ -60,11 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
-
-                String email = emailLogin.getText().toString();
-                String pass = claveLogin.getText().toString();
-
-                login(email, pass);
+                Intent myIntent1 = new Intent(getBaseContext(), usuario.class);
+                startActivity(myIntent1);
             break;
 
 

@@ -2,16 +2,16 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#EE0000</item>
-        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimary">#FB2D1E</item>
+        <item name="colorPrimaryDark">#B71C1C</item>
+        <item name="colorAccent">#E53935</item>
         <item name="title">Registro</item>
-        <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#9C27B0</item>
-        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimaryDark">#3700B3</item>
+        <item name="colorAccent">#BB86FC</item>
         <item name="title">Perfil</item>
-        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
         <style name="SplashTheme" parent="Theme.AppCompat">
@@ -21,7 +21,10 @@
     <style name="AppTheme3.NoActionBar" parent="AppTheme1">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="title"></item>
+        <item name="title">Usuario</item>
+        <item name="colorPrimary">#00E5FF</item>
+        <item name="colorPrimaryDark">#00B8D4</item>
+        <item name="colorAccent">#18FFFF</item>
         <item name="statusBarBackground">@android:color/transparent</item>
     </style>
 </resources>
