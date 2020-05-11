@@ -35,6 +35,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             tools:targetApi="lollipop" />
 
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
@@ -43,6 +44,7 @@
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/drawer_menu"
             tools:ignore="MissingConstraints" />
+
     </LinearLayout>
 
 

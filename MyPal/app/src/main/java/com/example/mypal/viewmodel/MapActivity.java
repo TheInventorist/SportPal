@@ -1,5 +1,8 @@
 package com.example.mypal.viewmodel;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -9,8 +12,10 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.mypal.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,12 +34,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private LatLng latLng;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -42,6 +49,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -56,9 +64,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
                 } catch (SecurityException e) {
                     e.printStackTrace();
                 }
