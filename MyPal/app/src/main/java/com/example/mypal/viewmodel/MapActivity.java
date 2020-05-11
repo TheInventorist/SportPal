@@ -39,9 +39,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-
-
+        setContentView(R.layout.activity_submenu);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -64,7 +62,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                 try {
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
                 } catch (SecurityException e) {
                     e.printStackTrace();
                 }
