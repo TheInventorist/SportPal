@@ -11,9 +11,9 @@ import com.google.firebase.auth.AuthResult;
 
 //Registro
 public class SQLiteHelper extends SQLiteOpenHelper {
-    String sqlCreate = "CREATE TABLE datosUsuario (idUsuario int primary key, nombreUsuario TEXT, correoUsuario TEXT, telUsuario TEXT)";
+    String sqlCreate = "CREATE TABLE datosUsuario (idUsuario int primary key, nombreUsuario TEXT, correoUsuario TEXT, telUsuario TEXT, fecnacUsuario TEXT, descUsuario TEXT)";
 
-    public SQLiteHelper(@Nullable registro context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public SQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

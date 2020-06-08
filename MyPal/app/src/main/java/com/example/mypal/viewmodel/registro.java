@@ -89,22 +89,24 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void SaveQlite(){
-        SQLiteHelper userbdbh = new SQLiteHelper(this,"DBUsuarios",null,1); //Cambiar version para gatillar onUpgrade
+        SQLiteHelper userbdbh = new SQLiteHelper(this,"DBAdministracion",null,1); //Cambiar version para gatillar onUpgrade
         SQLiteDatabase db = userbdbh.getWritableDatabase();
 
-        String nombre = nombreRegistro.getText().toString();
-        String correo = emailRegistro.getText().toString();
-        String telefono = telefonoRegistro.getText().toString();
+        Cursor cursor = db.rawQuery("SELECT * FROM datosUsuario",null);
+        int cantRegistros = cursor.getCount();
+
+        Log.d("tag","Tengo " + cantRegistros + " registros. El usuario a ingresar es el" + cantRegistros+1);
 
         ContentValues registro = new ContentValues();
-        registro.put("nombreUsuario",nombre);
-        registro.put("correoUsuario",correo);
-        registro.put("telUsuario",telefono);
+        registro.put("idUsuario",cantRegistros+1);
+        registro.put("nombreUsuario",String.valueOf(nombreRegistro));
+        registro.put("correoUsuario", String.valueOf(emailRegistro));
+        registro.put("telUsuario",String.valueOf(telefonoRegistro));
 
         db.insert("datosUsuario", null, registro);
 
         db.close();
-        Log.d("tag","Listo");
+        Log.d("tag","Listo SQL registro");
     }
 
     private  void crearDatosDePerfil(){
