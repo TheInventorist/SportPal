@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
  private LoginButton botonLoginFacebook;
  private AccessTokenTracker accessTokenTracker;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(MainActivity.this, "valide su cuenta antes de entrar", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(MainActivity.this, "El nombre de la cuenta y/o la contraseña que has introducido son incorrectos.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "fallo de autenticacion", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
