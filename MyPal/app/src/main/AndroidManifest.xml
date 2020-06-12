@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
 
     <application
         android:allowBackup="true"
@@ -16,36 +14,67 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <activity
-            android:name=".viewmodel.MapActivity"
-            android:label="@string/title_activity_maps">
+        <activity android:name=".viewmodel.ajustes"
+            android:theme="@style/CrearActividad.NoActionBar">
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".viewmodel.submenu"
+        <activity
+            android:name=".viewmodel.editarActividad"
+            android:theme="@style/EditarActividad">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".viewmodel.crearActividad"
+            android:theme="@style/CrearActividad">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".viewmodel.MapActivity"
+            android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme3.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".viewmodel.verificador">
+        <activity
+            android:name=".viewmodel.submenu"
+            android:theme="@style/AppTheme3.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".viewmodel.MainActivity">
+
+        <activity
+            android:name=".viewmodel.verificador"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".viewmodel.MainActivity"
+            android:theme="@style/Main">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".viewmodel.registro"
             android:exported="true"
-            android:theme="@style/AppTheme2"></activity>
+            android:theme="@style/AppTheme2" />
+
         <activity
             android:name=".viewmodel.usuario"
             android:theme="@style/AppTheme1">
@@ -53,37 +82,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".viewmodel.SplashActivity">
+
+        <activity
+            android:name=".viewmodel.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".viewmodel.PantallaCarga">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/> <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-            <activity
-                android:name="com.facebook.CustomTabActivity"
-                android:exported="true">
-                <intent-filter>
-                    <action
-                        android:name="android.intent.action.VIEW" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                    <category android:name="android.intent.category.BROWSABLE" />
-                    <data android:scheme="@string/fb_login_protocol_scheme" />
-                </intent-filter>
-            </activity>
 
     </application>
 
