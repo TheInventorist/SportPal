@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.866" />
 
-    <View
+    <EditText
         android:id="@+id/view"
         android:layout_width="318dp"
         android:layout_height="112dp"

@@ -21,4 +21,3 @@ public class PantallaCarga extends Activity{
             }
         },3000);
     }}
-
