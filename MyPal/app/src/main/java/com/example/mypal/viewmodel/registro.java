@@ -94,7 +94,6 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         u.setTelefono(telefono);
         dataBaseReference.child("Usuarios").child(u.getuId()).setValue(u);
 
-
     }
 
 
