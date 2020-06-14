@@ -4,9 +4,12 @@ package com.example.mypal.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -46,7 +49,6 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private FirebaseDatabase fireBaseDataBase;
     private DatabaseReference dataBaseReference;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
     int TAKE_IMAGE_CODE = 10001;
     ImageView fotoDePerfil;
     EditText descripcion;
@@ -60,6 +62,7 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
         fotoDePerfil = findViewById(R.id.imageView5);
         descripcion = findViewById(R.id.view);
 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
@@ -74,32 +77,6 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
                 Glide.with(usuario.this).load(user.getPhotoUrl()).into(fotoDePerfil);
             }
         }
-
-        mDisplayDate = (TextView) findViewById(R.id.fech_nacimiento);
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int anio = cal.get(Calendar.YEAR);
-                int mes = cal.get(Calendar.MONTH);
-                int dia = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(usuario.this, android.R.style.Theme_DeviceDefault_Light,mDateSetListener,anio,mes,dia);
-
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-                dialog.show();
-            }
-        });
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int anio, int mes, int dia) {
-                mes = mes +1;
-                String fecha = dia + "/" + mes + "/" + anio;
-                mDisplayDate.setText(fecha);
-
-            }
-        };
 
 
 
@@ -118,30 +95,21 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void modificarDatosPerfil() {
-        String fecha = mDisplayDate.getText().toString();
+        //String fecha = mDisplayDate.getText().toString();
         String texto = descripcion.getText().toString();
         User u = new User();
         u.setuId(mAuth.getCurrentUser().getUid().toString());
-        u.setFecha(fecha);
+        //u.setFecha(fecha);
         u.setDescripcion(texto);
         dataBaseReference.child("MasDatosUsuarios").child(u.getuId()).setValue(u);
 
     }
-
-   /* public void imagenDePerfil(View view) {
-        Intent intentImagenPerfil = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intentImagenPerfil.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(intentImagenPerfil, TAKE_IMAGE_CODE);
-        }
-        Log.d("camara","el boton funciona");
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TAKE_IMAGE_CODE){
             switch(requestCode){
-
                 case RESULT_OK:
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     fotoDePerfil.setImageBitmap(bitmap);
@@ -163,17 +131,19 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
                 .child(uid + ".jpeg");
         Log.d("camara","Se sube la foto");
 
-        reference.putBytes(baos.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                getDownloadUrl(reference);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
+        reference.putBytes(baos.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        getDownloadUrl(reference);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("foto","no se puede subir", e.getCause());
+                    }
+                });
 
     }
 
@@ -204,6 +174,12 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+    public void controladorImagenPerfil(View view) {
 
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, TAKE_IMAGE_CODE);
+        }
 
+    }
 }
