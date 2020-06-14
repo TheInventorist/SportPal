@@ -1,42 +1,43 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="Main" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">#356BDF</item>
-        <item name="colorPrimaryDark">#19387A</item>
-        <item name="colorAccent">#90CAF9</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#E80F0F</item>
-        <item name="colorPrimaryDark">#B71C1C</item>
-        <item name="colorAccent">#83666E6D</item>
         <item name="title">Registro</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#6200EE</item>
-        <item name="colorPrimaryDark">#3700B3</item>
-        <item name="colorAccent">#BB86FC</item>
         <item name="title">Perfil</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="CrearActividad" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#304FFE</item>
-        <item name="colorPrimaryDark">#1A237E</item>
-        <item name="colorAccent">#8C9EFF</item>
         <item name="title">Crear Actividad</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="EditarActividad" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#0091EA</item>
-        <item name="colorPrimaryDark">#1943DC</item>
-        <item name="colorAccent">#8C9EFF</item>
         <item name="title">Editar Actividad</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="CrearActividad.NoActionBar" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">#304FFE</item>
-        <item name="colorPrimaryDark">#1A237E</item>
-        <item name="colorAccent">#8C9EFF</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
         <style name="SplashTheme" parent="Theme.AppCompat">
@@ -47,10 +48,10 @@
     <style name="AppTheme3.NoActionBar" parent="AppTheme1">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="title">Usuario</item>
-        <item name="colorPrimary">#26C6DA</item>
-        <item name="colorPrimaryDark">#057B88</item>
-        <item name="colorAccent">#B2EBF2</item>
         <item name="statusBarBackground">@android:color/transparent</item>
     </style>
 </resources>
