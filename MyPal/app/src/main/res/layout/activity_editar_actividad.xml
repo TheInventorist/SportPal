@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descEdit"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.128" />
 
     <EditText
         android:id="@+id/tiempoEdit"
