@@ -4,8 +4,8 @@ public class User {
     public String uId;
     public String nombre;
     public String telefono;
-    public String correo;
-    public String password;
+    public String fecha;
+    public String descripcion;
 
 
     public User(){
@@ -37,21 +37,20 @@ public class User {
         this.telefono = telefono;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
 }
 
 

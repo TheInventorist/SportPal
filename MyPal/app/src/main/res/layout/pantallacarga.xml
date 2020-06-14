@@ -18,6 +18,6 @@
         android:layout_below="@+id/progressBar"
         android:layout_centerHorizontal="true"
         android:text="Cargando..."
-        android:textSize="15dp"
+        android:textSize="35dp"
         android:textColor="#000000"/>
 </RelativeLayout>

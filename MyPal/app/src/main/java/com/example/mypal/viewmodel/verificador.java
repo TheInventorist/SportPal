@@ -17,46 +17,25 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
-public class verificador extends AppCompatActivity {
-
-    private FirebaseDatabase fireBaseDataBase;
-    private DatabaseReference dataBaseReference;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseUser user = auth.getCurrentUser();
+/*
+public class verificador extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificador);
-        inicializarFireBase();
-    }
-    public void onButtonUsuario(View v){
-        Log.d("asd","enviar codigo");
-        //enviarEmail();
-        Intent myIntent3 = new Intent(getBaseContext(), usuario.class);
-        startActivity(myIntent3);
+
+        findViewById(R.id.btnVerificador).setOnClickListener(verificador.this);
     }
 
-
-    private void inicializarFireBase() {
-        FirebaseApp.initializeApp(this);
-        fireBaseDataBase = FirebaseDatabase.getInstance();
-        dataBaseReference = fireBaseDataBase.getReference();
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnVerificador:
+                Intent myIntent3 = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(myIntent3);
+                break;
+        }
     }
 
-    private void enviarEmail(){
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(verificador.this,"registrado, enviando email de verificacion", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-
-
-
-}
+}*/

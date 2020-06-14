@@ -9,15 +9,10 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_width="72dp"
+        android:layout_height="78dp"
+        android:src="@drawable/mypal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="Nombre de usuario"
-        android:textAppearance="@style/ThemeOverlay.AppCompat.Dark" />
+
 
 </LinearLayout>

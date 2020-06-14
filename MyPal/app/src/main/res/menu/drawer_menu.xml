@@ -22,9 +22,7 @@
 
         <item android:title=" ">
             <menu>
-                <item
-                    android:id="@+id/nav_ayuda"
-                    android:title="@string/ayuda" />
+
                 <item
                     android:id="@+id/nav_cerrar"
                     android:title="@string/cerrar_sesi_n" />

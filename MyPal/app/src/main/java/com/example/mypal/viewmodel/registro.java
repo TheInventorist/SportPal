@@ -2,11 +2,17 @@ package com.example.mypal.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mypal.R;
@@ -19,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 public class registro extends AppCompatActivity implements View.OnClickListener {
@@ -28,8 +35,13 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     public EditText telefonoRegistro;
     public EditText clave1Registro;
     public EditText clave2Registro;
+    public static int nuevo = 0;
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase fireBaseDataBase;
+    private DatabaseReference dataBaseReference;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TextView mDisplayDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +56,36 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         findViewById(R.id.btnRegistro).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(this);
+        fireBaseDataBase = FirebaseDatabase.getInstance();
+        dataBaseReference = fireBaseDataBase.getReference();
 
+
+        mDisplayDate = (TextView)findViewById(R.id.fech_nacimiento);
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int anio = cal.get(Calendar.YEAR);
+                int mes = cal.get(Calendar.MONTH);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(registro.this, android.R.style.Theme_DeviceDefault_Light,mDateSetListener,anio,mes,dia);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int anio, int mes, int dia) {
+                mes = mes +1;
+                String fecha = dia + "/" + mes + "/" + anio;
+                mDisplayDate.setText(fecha);
+
+            }
+        };
 
 
     }
@@ -64,10 +105,12 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             enviarEmailVerificacion();
+                            crearDatosDePerfil();
 
-                            Toast.makeText(registro.this, "Usuario Creado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(registro.this, "Usuario Creado, verifique su email", Toast.LENGTH_LONG).show();
+                            nuevo = 1;
 
-                            Intent myIntent2 = new Intent(getBaseContext(), verificador.class);
+                            Intent myIntent2 = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(myIntent2);
                         } else {
                             Toast.makeText(registro.this, "error de autenticacion",
@@ -77,11 +120,24 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
     }
 
+    private  void crearDatosDePerfil(){
+        String fecha = mDisplayDate.getText().toString();
+        String nombre = nombreRegistro.getText().toString();
+        String telefono = telefonoRegistro.getText().toString();
+        User u = new User();
+        u.setuId(mAuth.getCurrentUser().getUid().toString());
+        u.setNombre(nombre);
+        u.setTelefono(telefono);
+        u.setFecha(fecha);
+        dataBaseReference.child("Usuarios").child(u.getuId()).setValue(u);
+
+
+    }
 
 
 
-    private void enviarEmailVerificacion()
-    {
+
+    private void enviarEmailVerificacion(){
         FirebaseUser user = mAuth.getCurrentUser();
 
         user.sendEmailVerification()
@@ -95,9 +151,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                         }
                         else
                         {
-                            // no se envio el email, mostrar mensaje de reinicio de actividad or lo que sea
-                            // reinicio de la actividad
-
+                            Toast.makeText(registro.this, "Error al enviar mail de confirmacion, compruebe su conexion", Toast.LENGTH_SHORT).show();
                             overridePendingTransition(0, 0);
                             finish();
                             overridePendingTransition(0, 0);
@@ -108,51 +162,6 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
     }
 
-
-
-    // no borrar nada de aqui, servira para crear el usuario mas adelante
-
-    //private void inicializarFireBase() {
-    //    FirebaseApp.initializeApp(this);
-    //    fireBaseDataBase = FirebaseDatabase.getInstance();
-    //    dataBaseReference = fireBaseDataBase.getReference();
-    //}
-
-
-
-    //public void onButtonVerif(View v){
-    //
-    //    String nombre = nombreRegistro.getText().toString();
-    //    String email = emailRegistro.getText().toString();
-    //    String telefono = telefonoRegistro.getText().toString();
-    //    String clave1 = clave1Registro.getText().toString();
-    //    String clave2 = clave2Registro.getText().toString();
-    //    if(clave1.equals(clave2)){
-    //        //User u = new User();
-
-            //u.setuId(UUID.randomUUID().toString());
-            //u.setNombre(nombre);
-            //u.setCorreo(email);
-            //u.setTelefono(telefono);
-            //u.setPassword(clave1);
-            //dataBaseReference.child("Usuarios").child(u.getuId()).setValue(u);
-            //Toast.makeText(this, "Verifique su email", Toast.LENGTH_LONG).show();
-
-
-           //crearUsuario(email,clave1);
-
-            //Toast.makeText(this, "Usuario Creado", Toast.LENGTH_LONG).show();
-            //Intent myIntent2 = new Intent(getBaseContext(), verificador.class);
-            //startActivity(myIntent2);
-        //}
-        //else{
-         //   Toast.makeText(this, "Las claves no son iguales", Toast.LENGTH_LONG).show();
-        //}
-
-
-
-
-    //}
 
 
     @Override
