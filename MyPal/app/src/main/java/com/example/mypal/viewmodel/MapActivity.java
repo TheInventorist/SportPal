@@ -2,14 +2,10 @@ package com.example.mypal.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,10 +21,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
@@ -40,7 +38,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     private DrawerLayout drawerLayout;
 
-    private LatLng latLng;
+    public LatLng latLng;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase fireBaseDataBase;
+    private DatabaseReference dataBaseReference;
 
 /*
     private static final String[] INITIAL_PERMS={
@@ -63,6 +64,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         //Log.d("mapas","se carga el OnCreate2");
         setContentView(R.layout.activity_submenu);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(this);
+        fireBaseDataBase = FirebaseDatabase.getInstance();
+        dataBaseReference = fireBaseDataBase.getReference();
 
 
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
@@ -122,11 +127,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 try {
                     Log.d("mapas","logra el try");
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
+                    //mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
+                    //Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
                 } catch (SecurityException e) {
-                    Log.d("mapas","pasa al catch");
+                    //Log.d("mapas","pasa al catch");
                     e.printStackTrace();
                 }
             }
@@ -157,6 +162,28 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
+/*
+    private void crearDatosGps(){
+        UserLocation ul = new UserLocation();
+        User u = new User();
+        String user = "usuarioLider";
+
+        ul.setLatLng(latLng);
+
+        dataBaseReference.child("Actividades").child(user).setValue(ul);
+
+        //Log.d("usuario","se tiene: " + user + latLng); //configurando los datos gps y cosas para crear la actividad en un punto latlng y se lo paso para que crear actividad lo suba a DB
+    }
+
+    /*public LatLng enviarCoodenadas(){
+        return latLng;
+    }*/
+
+    private void crearActividad(){
+        Intent intent2 =new Intent(MapActivity.this, crearActividad.class);
+        startActivity(intent2);
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -167,8 +194,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 startActivity(intent);
                 break;
             case R.id.nav_crear_actividad:
-                Intent intent2 =new Intent(MapActivity.this, crearActividad.class);
-                startActivity(intent2);
+                //crearDatosGps();
+                crearActividad();
+                break;
+            case R.id.nav_ajustes:
+                Intent intent3 =new Intent(MapActivity.this, editarActividad.class);
+                startActivity(intent3);
+                break;
+            case R.id.nav_cerrar:
+                Intent intent4 =new Intent(MapActivity.this, MainActivity.class);
+                startActivity(intent4);
                 break;
 
         }
