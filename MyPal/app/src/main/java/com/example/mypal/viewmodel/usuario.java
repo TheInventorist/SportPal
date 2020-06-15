@@ -91,7 +91,7 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
         switch(v.getId()){
             case R.id.btnPerfil:
                 modificarDatosPerfil();
-                Intent myIntent1 = new Intent(getBaseContext(), PantallaCarga.class);
+                Intent myIntent1 = new Intent(getBaseContext(), MapActivity.class);
                 startActivity(myIntent1);
                 break;
         }

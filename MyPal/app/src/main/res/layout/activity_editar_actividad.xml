@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,36 +38,13 @@
         app:layout_constraintVertical_bias="0.087" />
 
     <TextView
-        android:id="@+id/txt5"
-        android:layout_width="280dp"
-        android:layout_height="29dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:text="Duración"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.328"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385" />
-
-    <TextView
         android:id="@+id/txt6"
         android:layout_width="150dp"
         android:layout_height="33dp"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:text="Descripción"
         android:textColor="#000000"
@@ -78,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.548" />
+        app:layout_constraintVertical_bias="0.447" />
 
     <Button
         android:id="@+id/btnActualizar"
@@ -94,17 +70,16 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descEdit"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintVertical_bias="0.197"
+        android:onClick="guardarInfo"/>
 
     <EditText
         android:id="@+id/descEdit"
         android:layout_width="307dp"
         android:layout_height="61dp"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:gravity="start|top"
@@ -117,7 +92,7 @@
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.534" />
 
     <Button
         android:id="@+id/btnFinalizar"
@@ -133,29 +108,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnActualizar"
-        app:layout_constraintVertical_bias="0.233" />
-
-    <EditText
-        android:id="@+id/tiempoEdit"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="uración en minutos"
-        android:inputType="time"
-        android:textColorHint="#6A575252"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.233"
+        android:onClick="finalizarActividad"/>
 
     <EditText
         android:id="@+id/nameEdit"

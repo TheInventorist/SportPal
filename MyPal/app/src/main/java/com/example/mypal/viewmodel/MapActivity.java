@@ -37,9 +37,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,7 +51,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
@@ -64,6 +67,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private FirebaseAuth mAuth;
     private FirebaseDatabase fireBaseDataBase;
     private DatabaseReference dataBaseReference;
+
+    private DatabaseReference mDataBase;
+
+    public int estadoActividad = 0;
+    String nombre;
+    String descrip;
+    int integrantes;
+    String latitud;
+    String longitud;
+
+    int clickeado;
 
 /*
     private static final String[] INITIAL_PERMS={
@@ -132,7 +146,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             }
         });*/
 
-
+        mDataBase = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -145,7 +159,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         mMap.setMyLocationEnabled(true);
 
 
-        Log.d("mapas","prepara el mapa");
+        //Log.d("mapas","prepara el mapa");
         locationListener = new LocationListener() {
 
             @Override
@@ -170,6 +184,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             }
 
 
+
+
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
 
@@ -185,6 +201,105 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
             }
         };
+
+/*
+
+        Intent intent = getIntent();
+
+        estadoActividad = intent.getIntExtra("estado",0);
+        nombre = intent.getStringExtra("nombre");
+        descrip = intent.getStringExtra("descrip");
+        integrantes = intent.getIntExtra("integrantes", 0);
+        latitud = intent.getDoubleExtra("latitud",0);
+        longitud = intent.getDoubleExtra("longitud",0);
+
+
+        if(estadoActividad == 1){
+            estadoActividad = 0;
+            LatLng activ = new LatLng(latitud,longitud);
+            googleMap.addMarker(new MarkerOptions()
+                    .position(activ).snippet(descrip + ", integrantes: " + integrantes)
+                    .title(nombre)).showInfoWindow();
+        }
+        */
+
+        mDataBase.child("Actividades").child("usuarioLider").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    //UserLocation userLoc = new UserLocation(snapshot.getValue(UserLocation.class));
+
+                    //String descripcion = userLoc.getDescription();
+                    integrantes = dataSnapshot.child("integrantes").getValue(int.class);
+                    latitud = dataSnapshot.child("latitud").getValue(String.class);
+                    longitud = dataSnapshot.child("longitud").getValue(String.class);
+                    nombre = dataSnapshot.child("nombreActividad").getValue(String.class);
+                    descrip = dataSnapshot.child("description").getValue(String.class);
+                    /*
+                    String latitud = userLoc.getLatitud();
+                    String longitud = userLoc.getLongitud();
+                    String nombre = userLoc.getNombreActividad();
+                    */
+                }
+
+
+
+
+
+                if(integrantes > 0){
+                    //MarkerOptions markerOptions = new MarkerOptions();
+                    LatLng activ = new LatLng(Double.valueOf(latitud),Double.valueOf(longitud));
+                    mMap.addMarker(new MarkerOptions()
+                            .position(activ).snippet(descrip + ", integrantes: " + integrantes)
+                            .title(nombre)).showInfoWindow();
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+                            UserLocation ul = new UserLocation();
+
+                            String user = "usuarioLider";
+
+                            if(clickeado == 0){
+                                integrantes = integrantes + 1;
+                                clickeado = 1;
+                            }
+
+                            ul.setUser(user);
+                            ul.setNombreActividad(nombre);
+                            ul.setLatitud(latitud);
+                            ul.setLongitud(longitud);
+                            ul.setDescription(descrip);
+                            ul.setIntegrantes(integrantes);
+
+                            dataBaseReference.child("Actividades").child(user).setValue(ul);
+                        }
+                    });
+
+
+
+                }
+                else{
+                    mMap.clear();
+                    Log.d("GPS","se borra");
+                }
+
+                Log.d("GPS","Llegamos aqui");
+
+
+
+
+                }
+            //}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Log.d("mapas","continua");
@@ -248,22 +363,23 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int title;
         switch (menuItem.getItemId()) {
+            default:
+                break;
+            case R.id.nav_ajustes:
+                editarActividadx();
+                break;
             case R.id.nav_perfil:
-                Intent intent=new Intent(MapActivity.this, usuario.class);
-                startActivity(intent);
+                usuariox();
                 break;
             case R.id.nav_crear_actividad:
                 //crearDatosGps();
                 crearActividad();
                 break;
-            case R.id.nav_ajustes:
-                Intent intent3 =new Intent(MapActivity.this, editarActividad.class);
-                startActivity(intent3);
-                break;
             case R.id.nav_cerrar:
                 Intent intent4 =new Intent(MapActivity.this, MainActivity.class);
                 startActivity(intent4);
                 break;
+
 
         }
 
@@ -279,6 +395,19 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         return true;
     }
 
+    private void editarActividadx() {
+        Intent intentEditar =new Intent(MapActivity.this, editarActividad.class);
+        intentEditar.putExtra("integrantes",integrantes);
+        intentEditar.putExtra("latitud",latitud);
+        intentEditar.putExtra("longitud",longitud);
+        startActivity(intentEditar);
+    }
+
+    private void usuariox() {
+        Intent intent10=new Intent(MapActivity.this, usuario.class);
+        startActivity(intent10);
+    }
+
     @Override
     public void onDrawerSlide(@NonNull View view, float v) {
         //cambio en la posición del drawer
@@ -287,8 +416,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onDrawerOpened(@NonNull View view) {
         //el drawer se ha abierto completamente
-        Toast.makeText(this, getString(R.string.navigation_drawer_open),
-                Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, getString(R.string.navigation_drawer_open),
+        //        Toast.LENGTH_SHORT).show();
     }
 
     @Override

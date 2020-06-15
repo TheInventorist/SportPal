@@ -18,7 +18,10 @@ import android.widget.Toast;
 import com.example.mypal.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class crearActividad extends AppCompatActivity {
+public class crearActividad extends AppCompatActivity{
 
     public EditText nombreAct;
     public EditText DescripcionAct;
@@ -41,8 +44,12 @@ public class crearActividad extends AppCompatActivity {
     private LocationManager locationManager;
     private final long MIN_TIME = 1000;
     private final long MIN_DIST = 5;
-    String latitud;
-    String longitud;
+    public String latitud;
+    public String longitud;
+    public String nombreActividad;
+    public String descripcionActividad;
+    public int cantidadIntegrantes;
+    public int actividadCreada = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,8 @@ public class crearActividad extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         fireBaseDataBase = FirebaseDatabase.getInstance();
         dataBaseReference = fireBaseDataBase.getReference();
+
+
 
 /*
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Actividades").child("usuarioLider");
@@ -108,8 +117,11 @@ public class crearActividad extends AppCompatActivity {
         MapActivity clase = new MapActivity();
         String nombre = nombreAct.getText().toString();
 
+        nombreActividad = nombre;
+        descripcionActividad = desc;
+        cantidadIntegrantes = integrante;
 
-        Log.d("usuario","se tiene: " + latLng);
+        //Log.d("usuario","se tiene: " + latLng);
 
         //if(mAuth.getCurrentUser().getUid().toString() == null){
         //    user = "usuarioLider";
@@ -132,12 +144,29 @@ public class crearActividad extends AppCompatActivity {
 
     private void volverAlMapa(){
         Intent intent =new Intent(crearActividad.this, MapActivity.class);
+        /*intent.putExtra("estado",actividadCreada);
+        intent.putExtra("nombre",nombreActividad);
+        intent.putExtra("descrip",descripcionActividad);
+        intent.putExtra("integrantes",cantidadIntegrantes);
+        intent.putExtra("latitud",Double.valueOf(latitud));
+        intent.putExtra("longitud",Double.valueOf(longitud));*/
         startActivity(intent);
     }
 
 
     public void crearActividad(View view) {
         crearDatosGps();
+        CrearPuntoActividad();
         volverAlMapa();
+
     }
+
+    private void CrearPuntoActividad() {
+        actividadCreada = 1;
+
+
+
+    }
+
+
 }
