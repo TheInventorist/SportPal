@@ -8,14 +8,16 @@ import java.util.Date;
 
 public class UserLocation {
 
-    private LatLng latLng;
+    private String latitud;
+    private String longitud;
     private String user;
     private String description;
     private int integrantes;
     private String nombreActividad;
 
-    public UserLocation(LatLng latLng, String user, String description, int integrantes, String nombreActividad) {
-        this.latLng = latLng;
+    public UserLocation(String  latitud, String longitud, String user, String description, int integrantes, String nombreActividad) {
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.user = user;
         this.description = description;
         this.integrantes = integrantes;
@@ -35,12 +37,20 @@ public class UserLocation {
         this.nombreActividad = nombreActividad;
     }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
+    public String getLatitud() {
+        return latitud;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 
     public String getUser() {
@@ -67,12 +77,5 @@ public class UserLocation {
         this.integrantes = integrantes;
     }
 
-    @Override
-    public String toString() {
-        return "UserLocation{" +
-                "geoPoint=" + latLng +
-                ", timeStramp='" +
-                ", user=" + user +
-                '}';
-    }
+
 }

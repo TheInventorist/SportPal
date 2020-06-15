@@ -316,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void login(String email, String password){
+        //mAuth.signInWithEmailAndPassword("mario.aguila_70@hotmail.com", "1234567")
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

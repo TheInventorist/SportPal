@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -39,6 +41,8 @@ public class crearActividad extends AppCompatActivity {
     private LocationManager locationManager;
     private final long MIN_TIME = 1000;
     private final long MIN_DIST = 5;
+    String latitud;
+    String longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,21 @@ public class crearActividad extends AppCompatActivity {
         });
 
 */
+    SelectSQL();
     }
+
+    protected void SelectSQL(){
+
+        SQLiteHelper userbdbh = new SQLiteHelper(this,"DBAdministracion",null,1); //Cambiar version para gatillar onUpgrade
+        SQLiteDatabase db = userbdbh.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM datosActividad WHERE idDato = 1",null);
+        cursor.moveToFirst();
+        latitud = cursor.getString(1);
+        longitud = cursor.getString(2);
+        cursor.close();
+    }
+
 /*
     private void showData(DataSnapshot dataSnapshot) {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -77,71 +95,10 @@ public class crearActividad extends AppCompatActivity {
     }*/
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
-
-
-        Log.d("mapas","prepara el mapa");
-        locationListener = new LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-
-                try {
-                    Log.d("mapas","logra el try");
-                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    //mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    //Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
-                } catch (SecurityException e) {
-                    //Log.d("mapas","pasa al catch");
-                    e.printStackTrace();
-                }
-            }
-
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Log.d("mapas","continua");
-        try {
-            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, MIN_TIME, MIN_DIST, locationListener);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-
-
-
-
 
 
 
     private void crearDatosGps(){
-
-        latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         UserLocation ul = new UserLocation();
         User u = new User();
@@ -162,7 +119,8 @@ public class crearActividad extends AppCompatActivity {
         //}
         ul.setUser(user);
         ul.setNombreActividad(nombre);
-        ul.setLatLng(latLng);
+        ul.setLatitud(latitud);
+        ul.setLongitud(longitud);
         ul.setDescription(desc);
         ul.setIntegrantes(integrante);
         //ul.setTimeStramp(time);

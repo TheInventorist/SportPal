@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -157,10 +160,30 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         u.setTelefono(telefono);
         u.setFecha(fecha);
         dataBaseReference.child("Usuarios").child(u.getuId()).setValue(u);
-
-
+        SaveQlite();
     }
 
+    private void SaveQlite(){
+        SQLiteHelper userbdbh = new SQLiteHelper(this,"DBAdministracion",null,1); //Cambiar version para gatillar onUpgrade
+        SQLiteDatabase db = userbdbh.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM datosUsuario",null);
+        int cantRegistros = cursor.getCount();
+
+        Log.d("tag","Tengo " + cantRegistros + " registros. El usuario a ingresar es el" + cantRegistros+1);
+
+        ContentValues registro = new ContentValues();
+        registro.put("idUsuario",cantRegistros+1);
+        registro.put("nombreUsuario",String.valueOf(nombreRegistro));
+        registro.put("correoUsuario", String.valueOf(emailRegistro));
+        registro.put("telUsuario",String.valueOf(telefonoRegistro));
+        registro.put("fecnacUsuario",String.valueOf(mDisplayDate));
+
+        db.insert("datosUsuario", null, registro);
+
+        db.close();
+        Log.d("tag","Listo SQL registro");
+    }
 
     private void enviarEmailVerificacion(){
         FirebaseUser user = mAuth.getCurrentUser();

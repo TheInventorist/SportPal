@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 
 import androidx.core.app.ActivityCompat;
@@ -17,6 +18,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -154,6 +157,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
                     //mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    Log.d("GPS",String.valueOf(latLng));
+                    Log.d("GPS",String.valueOf(latLng.latitude));
+                    Log.d("GPS",String.valueOf(latLng.longitude));
+
                     //Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
                 } catch (SecurityException e) {
                     //Log.d("mapas","pasa al catch");
@@ -206,8 +213,34 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     }*/
 
     private void crearActividad(){
+        almacenarLatLng();
         Intent intent2 =new Intent(MapActivity.this, crearActividad.class);
         startActivity(intent2);
+    }
+
+    private void almacenarLatLng(){
+
+        Log.d("GPS",String.valueOf(latLng));
+        Log.d("GPS",String.valueOf(latLng.latitude));
+        Log.d("GPS",String.valueOf(latLng.longitude));
+
+
+        String latitud = String.valueOf(latLng.latitude);
+        String longitud = String.valueOf(latLng.longitude);
+
+        SQLiteHelper admin = new SQLiteHelper(this,"DBAdministracion",null,1);
+        SQLiteDatabase basedatos = admin.getWritableDatabase();
+
+        ContentValues datos = new ContentValues();
+        datos.put("lat",latitud);
+        datos.put("long",longitud);
+
+        //db.insert("datosUsuario", null, usuario);
+        basedatos.update("datosActividad",datos,"idDato = 1",null);
+
+        basedatos.close();
+        Log.d("tag","Lat y long guardados");
+
     }
 
 

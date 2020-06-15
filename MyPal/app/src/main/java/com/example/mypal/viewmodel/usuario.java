@@ -8,8 +8,11 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -103,6 +106,7 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
         u.setDescripcion(texto);
         dataBaseReference.child("MasDatosUsuarios").child(u.getuId()).setValue(u);
 
+        Save2Qlite(texto);
     }
 
     @Override
@@ -181,5 +185,24 @@ public class usuario extends AppCompatActivity implements View.OnClickListener {
             startActivityForResult(intent, TAKE_IMAGE_CODE);
         }
 
+    }
+
+    private void Save2Qlite(String desc){
+        SQLiteHelper admin = new SQLiteHelper(this,"DBAdministracion",null,1);
+        SQLiteDatabase basedatos = admin.getWritableDatabase();
+
+        Cursor cursor = basedatos.rawQuery("SELECT * FROM datosUsuario",null);
+        int cantRegistros = cursor.getCount();
+
+        Log.d("tag","El registro tiene el  id: "+ cantRegistros);
+
+        ContentValues perfil = new ContentValues();
+        perfil.put("descUsuario",desc);
+
+        //db.insert("datosUsuario", null, usuario);
+        basedatos.update("datosUsuario",perfil,"idUsuario = " + cantRegistros,null);
+
+        basedatos.close();
+        Log.d("tag","Listo");
     }
 }
