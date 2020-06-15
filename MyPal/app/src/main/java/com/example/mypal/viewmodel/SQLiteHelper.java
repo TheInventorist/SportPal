@@ -26,4 +26,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Busqueda");
         db.execSQL(sqlCreate);
     }
+
 }
+

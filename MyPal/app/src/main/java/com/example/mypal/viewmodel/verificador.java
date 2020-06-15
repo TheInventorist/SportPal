@@ -17,7 +17,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 /*
+
+
+/*
+>>>>>>> c1023cac5f8505e1268b98ce4c16c0f650ea713f
+>>>>>>> UI_sprint2
 public class verificador extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -38,4 +44,7 @@ public class verificador extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+
 }*/
+
+

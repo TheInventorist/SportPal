@@ -33,6 +33,7 @@
         app:layout_constraintVertical_bias="0.288"
         android:onClick="crearActividad"/>
 
+
     <TextView
         android:id="@+id/txt1"
         android:layout_width="300dp"
@@ -50,28 +51,8 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintVertical_bias="0.098" />
 
-
-
-    <EditText
-        android:id="@+id/descAct"
-        android:layout_width="300dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreAct"
-        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/nombreAct"
@@ -83,7 +64,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="máximo 15 carácteres"
+        android:hint="Máximo 15 carácteres"
         android:inputType="textPersonName"
         android:maxLength="15"
         android:textColor="#000000"
@@ -96,15 +77,14 @@
         app:layout_constraintTop_toBottomOf="@+id/txt1"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/txt3"
         android:layout_width="300dp"
         android:layout_height="33dp"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
         android:text="Descripción"
         android:textColor="#000000"
@@ -114,7 +94,28 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreAct"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.141" />
 
+    <EditText
+        android:id="@+id/descAct"
+        android:layout_width="300dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Máximo 30 carácteres"
+        android:inputType="textMultiLine"
+        android:textColorHint="#6A575252"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt3"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

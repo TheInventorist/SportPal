@@ -2,10 +2,21 @@ package com.example.mypal.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+
+import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,11 +33,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+
 
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
@@ -59,11 +78,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Log.d("mapas","se carga el OnCreate2");
         setContentView(R.layout.activity_submenu);
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
         fireBaseDataBase = FirebaseDatabase.getInstance();
@@ -72,6 +93,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -127,11 +151,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 try {
                     Log.d("mapas","logra el try");
                     latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
                     //mMap.addMarker(new MarkerOptions().position(latLng).title("hola"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     //Toast.makeText(MapActivity.this,  "ubicacion cambio", Toast.LENGTH_LONG).show(); //Correcto
                 } catch (SecurityException e) {
                     //Log.d("mapas","pasa al catch");
+
                     e.printStackTrace();
                 }
             }
@@ -215,6 +241,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         setTitle(getString(title));
 
         drawerLayout.closeDrawer(GravityCompat.START);*/
+
 
         return true;
     }

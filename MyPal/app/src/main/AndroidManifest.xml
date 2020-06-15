@@ -19,7 +19,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity android:name=".viewmodel.ajustes"
-            android:theme="@style/CrearActividad.NoActionBar">
+            android:theme="@style/AppTheme3.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
