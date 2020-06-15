@@ -98,17 +98,17 @@
 
     <!-- texto si no esta registrado -->
 
-    <ImageButton
-        android:id="@+id/imgbtnGoogle"
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/IngresoGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/boton_rs"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button_fb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCrearcuenta"
-        app:srcCompat="@drawable/logogoogle32" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button_fb"
